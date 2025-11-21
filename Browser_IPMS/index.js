@@ -1,6 +1,6 @@
-var express = require('express');
-var cors = require('cors');
-var app = express();
+const express = require('express');
+const cors = require('cors');
+const app = express();
 const requestIp = require('request-ip');
 
 
@@ -21,7 +21,10 @@ app.get('/api/whoami', (req, res) => {
 
 
 
+// give this service its own default port so it can run alongside the others
+const port = process.env.PORT || 3101;
+
 // listen for requests :)
-var listener = app.listen(process.env.PORT, function() {
+const listener = app.listen(port, function() {
     console.log('Your app is listening on port ' + listener.address().port);
 });

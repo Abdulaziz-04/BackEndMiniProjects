@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini Services Dashboard</title>
+    <style>
+      :root {
+        --bg: #f6f7fb;
+        --card: #ffffff;
+        --panel: #f1f3f9;
+        --border: #d7dce5;
+        --text: #1f2937;
+        --muted: #4b5563;
+        --accent: #2563eb;
+        --accent-2: #0ea5e9;
+        --font: "Inter", system-ui, -apple-system, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: radial-gradient(
+            circle at 15% 20%,
+            rgba(37, 99, 235, 0.08),
+            transparent 32%
+          ),
+          radial-gradient(
+            circle at 80% 15%,
+            rgba(14, 165, 233, 0.08),
+            transparent 32%
+          ),
+          var(--bg);
+        color: var(--text);
+        font-family: var(--font);
+        min-height: 100vh;
+      }
+      .wrap {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 32px 18px 52px;
+      }
+      h1 {
+        margin: 0 0 10px;
+        font-weight: 800;
+        text-align: center;
+        letter-spacing: 0.3px;
+      }
+      .subtitle {
+        text-align: center;
+        color: var(--muted);
+        margin: 0 0 26px;
+        font-size: 0.95rem;
+      }
+      .grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      @media (max-width: 900px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .card {
+        background: linear-gradient(160deg, #ffffff, #f8fafc);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 16px;
+        box-shadow: 0 10px 24px rgba(31, 41, 55, 0.08);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        min-height: 220px;
+      }
+      .card h2 {
+        margin: 0;
+        font-size: 1.05rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .pill {
+        font-size: 0.75rem;
+        color: var(--bg);
+        background: var(--accent);
+        padding: 2px 8px;
+        border-radius: 999px;
+        font-weight: 700;
+      }
+      .muted {
+        color: var(--muted);
+        margin: 0;
+      }
+      ul {
+        margin: 8px 0 0 16px;
+        color: var(--muted);
+        padding: 0;
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-top: 4px;
+      }
+      .endpoint {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 6px 8px;
+        font-family: "JetBrains Mono", Consolas, monospace;
+        font-size: 0.88rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: var(--accent-2);
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 4px;
+      }
+      a.btn {
+        padding: 8px 12px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: var(--bg);
+        background: linear-gradient(135deg, #f59e0b, #f97316);
+        font-weight: 700;
+        box-shadow: 0 6px 14px rgba(249, 115, 22, 0.25);
+        transition: transform 0.08s ease, box-shadow 0.08s ease;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+      }
+      a.btn.secondary {
+        background: none;
+        border: 1px dashed var(--border);
+        color: var(--muted);
+        box-shadow: none;
+      }
+      a.btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 18px rgba(249, 115, 22, 0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Backend Microservices Dashboard</h1>
+      <p class="subtitle">
+        Each service keeps its original UI; launch and test endpoints from one
+        page.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h2>Browser-IP Microservice <span class="pill">Who am I</span></h2>
+          <p class="muted">Returns your IP, language, and user agent.</p>
+          <div class="row">
+            <span class="muted">Endpoint</span>
+            <span class="endpoint">http://localhost:3101/api/whoami</span>
+          </div>
+          <div class="row">
+            <span class="muted">Default port</span>
+            <span class="endpoint">3101</span>
+          </div>
+          <div class="actions">
+            <a
+              class="btn"
+              href="http://localhost:3101/"
+              target="_blank"
+              rel="noopener"
+              >Open UI</a
+            >
+            <a
+              class="btn secondary"
+              href="http://localhost:3101/api/whoami"
+              target="_blank"
+              rel="noopener"
+              >Test endpoint</a
+            >
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Timestamp Microservice <span class="pill">Dates</span></h2>
+          <p class="muted">
+            Converts dates to Unix/UTC or returns current time.
+          </p>
+          <div class="row">
+            <span class="muted">Endpoint</span>
+            <span class="endpoint"
+              >http://localhost:3103/api/timestamp/:date_string?</span
+            >
+          </div>
+          <div class="row">
+            <span class="muted">Default port</span>
+            <span class="endpoint">3103</span>
+          </div>
+          <div class="actions">
+            <a
+              class="btn"
+              href="http://localhost:3103/"
+              target="_blank"
+              rel="noopener"
+              >Open UI</a
+            >
+            <a
+              class="btn secondary"
+              href="http://localhost:3103/api/timestamp/2015-12-25"
+              target="_blank"
+              rel="noopener"
+              >Sample request</a
+            >
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>File Metadata Microservice <span class="pill">Files</span></h2>
+          <p class="muted">Upload a file and get its name, type, and size.</p>
+          <div class="row">
+            <span class="muted">Endpoint</span>
+            <span class="endpoint">http://localhost:3102/api/fileanalyse</span>
+          </div>
+          <div class="row">
+            <span class="muted">Default port</span>
+            <span class="endpoint">3102</span>
+          </div>
+          <div class="actions">
+            <a
+              class="btn"
+              href="http://localhost:3102/"
+              target="_blank"
+              rel="noopener"
+              >Open UI</a
+            >
+            <a
+              class="btn secondary"
+              href="http://localhost:3102/api/fileanalyse"
+              target="_blank"
+              rel="noopener"
+              >POST form data</a
+            >
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>URL Shortener <span class="pill">Links</span></h2>
+          <p class="muted">
+            Shortens URLs and redirects to the target page, utilizes MongoDB.
+          </p>
+          <div class="row">
+            <span class="muted">Endpoint</span>
+            <span class="endpoint">http://localhost:3104/api/shorturl/new</span>
+          </div>
+          <div class="row">
+            <span class="muted">Default port</span>
+            <span class="endpoint">3104</span>
+          </div>
+          <div class="actions">
+            <a
+              class="btn"
+              href="http://localhost:3104/"
+              target="_blank"
+              rel="noopener"
+              >Open UI</a
+            >
+            <a
+              class="btn secondary"
+              href="http://localhost:3104/api/shorturl/new"
+              target="_blank"
+              rel="noopener"
+              >API docs</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

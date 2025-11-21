@@ -1,11 +1,9 @@
-var express = require('express');
-var multer = require('multer');
-var cors = require('cors');
+const express = require('express');
+const multer = require('multer');
+const cors = require('cors');
 
-// require and use "multer"...
-
-var app = express();
-var upload = multer({
+const app = express();
+const upload = multer({
     limits: { fileSize: 10000000 }
 })
 
@@ -37,6 +35,9 @@ app.post('/api/fileanalyse', upload.single('upfile'), (req, res) => {
     }
 })
 
-app.listen(process.env.PORT || 3000, function() {
+// unique default port so all mini-services can co-run
+const port = process.env.PORT || 3102;
+
+app.listen(port, function() {
     console.log('Node.js listening ...');
 });
